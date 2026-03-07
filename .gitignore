@@ -2,3 +2,5 @@ backend/venv/
 node_modules/
 frontend/static/*.js
 .vscode/
+__pycache__/
+.pyc
