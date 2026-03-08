@@ -4,12 +4,13 @@ from .config import *
 class StateSystem:
     def __init__(self): # Initializes system to a CALM state 
         self.state = state.CALM
-        self.state_start_time = time.time()
+        self.init_time = time.monotonic()
+        self.state_start_time = time.monotonic()
         self.smoothed_arousal = 0.0
         self.stability = 0.0
         self.initialized = False
 
-    # Main state update function that applies EMA, Dwell Time, and Hysteresis-based transitions
+    # Main state update function that applies Exponential Moving Average (EMA), Minimum Dwell Time, and Hysteresis-based transitions
     def update(self, raw_arousal: float):
         # Applies Temporal Smoothing (EMA)
         if not self.initialized: 
@@ -21,19 +22,19 @@ class StateSystem:
                 ALPHA * raw_arousal + (1 - ALPHA) * self.smoothed_arousal # alpha * a(t) + (1 - alpha) * a-hat
             )
             arousal_delta = self.smoothed_arousal - previous_smoothed_arousal
-            self.stability = 1 / (1 + abs(arousal_delta))
+            self.stability = 1 / (1 + abs(arousal_delta)) # Indicates the stability of the arousal value--high value equals less change, low value equals high change
 
         # Applies Minimum Dwell Time
-        state_duration = time.time() - self.state_start_time 
-        if (state_duration < DWELL_TIME):
+        state_duration = time.monotonic() - self.state_start_time 
+        if (state_duration < DWELL_TIME): # If state duration does not meet or exceed DWELL TIME, continue being in this state.
             return self.state
-        else:
+        else: 
             new_state = self.transition(self.smoothed_arousal)
 
         # Enforces rule-based state-transition logic 
         if (new_state != self.state) and (new_state in TRANSITIONS[self.state]): 
             self.state = new_state
-            self.state_start_time = time.time()
+            self.state_start_time = time.monotonic()
 
         return self.state
 
