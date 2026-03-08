@@ -1,7 +1,7 @@
 import time
 
-from backend.state_system.state_system import StateSystem
-from backend.state_system.config import UPDATE_TIME
+from state_system.state_system import StateSystem
+from state_system.config import UPDATE_TIME
 
 sm = StateSystem()
 
