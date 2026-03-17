@@ -1,0 +1,44 @@
+:root {
+  --bg: #000000;
+  --primary: #FF0000;
+  --secondary: #FF0000;
+  --accent: #FF0000;
+  --count: 1;
+  --speed: 1;
+}
+
+.calm {
+  --bg: #f3cece;
+  --primary: #ffffff;
+  --secondary: #1e1e1e;
+  --accent: #1e1e1e;
+  --count: 3;
+  --speed: 10s;
+}
+
+.neutral {
+  --bg: #b7dbc5;
+  --primary: #00c22d;
+  --secondary: #1e1e1e;
+  --accent: #204111;
+  --count: 5;
+  --speed: 5s;
+}
+
+.engaged {
+  --bg: #f2cf32;
+  --primary: #ee4f00;
+  --secondary: #1e1e1e;
+  --accent: #464915;
+  --count: 9;
+  --speed: 3s;
+}
+
+.overloaded {
+  --bg: #ffa16b;
+  --primary: #ff0000;
+  --secondary: #1e1e1e;
+  --accent: #611f1f;
+  --count: 13;
+  --speed: 0.5s;
+}

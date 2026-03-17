@@ -3,12 +3,50 @@
 <head>
     <title>Capstone Project App</title>
     <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/themes.css">
 </head>
 
+<div>
+    <div id="system-total"></div>
+    <div id="system-time_sec"></div>
+    <div id="system-arousal"></div>
+    <div id="system-state"></div>
+    <div id="system-stability"></div>
+
+</div>
+
 <body>
-    <div> Hello World</div>
-    <button id="btn">Call api/test</button>
+    <div class="theme-controls"> 
+        <button id="btn1">Calm theme</button>
+        <button id="btn2">Neutral theme</button>
+        <button id="btn3">Engaged theme</button>
+        <button id="btn4">Overloaded theme</button>
+        <button id="btn5">Get current theme</button>
+    </div>
+    
 
     <script src="/static/app.js"></script>
+
+    <div class="container">
+        <div class="object" style="--i:0"></div>
+        <div class="object" style="--i:1"></div>
+        <div class="object" style="--i:2"></div>
+        <div class="object" style="--i:3"></div>
+        <div class="object" style="--i:4"></div>
+        <div class="object" style="--i:5"></div>
+        <div class="object" style="--i:6"></div>
+        <div class="object" style="--i:7"></div>
+        <div class="object" style="--i:8"></div>
+        <div class="object" style="--i:9"></div>
+        <div class="object" style="--i:10"></div>
+        <div class="object" style="--i:11"></div>
+        <div class="object" style="--i:12"></div>
+        <div class="object" style="--i:13"></div>
+        <div class="object" style="--i:14"></div>
+        <div class="origin" style="--i:15"></div>
+    </div>
+    
 </body>
+
+
 </html>

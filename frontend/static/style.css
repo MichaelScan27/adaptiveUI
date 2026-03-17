@@ -1,4 +1,59 @@
 body {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: xx-large;
+  background-color: var(--bg);
+  color: var(--secondary);
+
+  display: grid;
+  place-items: center;
+  height:100vh;
+}
+
+.theme-controls {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  animation: spin var(--speed) linear infinite;
+}
+
+.object {
+  position: absolute;
+  width:50px;
+  height:25px;
+  background: var(--primary);
+  border-radius: 100px / 50px;
+
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+
+  transform: rotate(calc(var(--i) * 360deg / var(--count))) translate(100px);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+body, .container {
+  transition: 
+    background-color 5s ease, 
+    color 5s ease, 
+}
+
+.origin {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translate(-50%, -50%);
 }

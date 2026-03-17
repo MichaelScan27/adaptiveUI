@@ -30,5 +30,5 @@ OVERLOADED_ENGAGED_EXIT = 0.75
 
 ## Miscelaneous 
 UPDATE_TIME = 0.2 # frequency of updates in seconds
-DWELL_TIME = 1.5 # minimum dwell time in seconds
+DWELL_TIME = 5 # minimum dwell time in seconds
 ALPHA = 0.25 # EMA Smoothing strength
