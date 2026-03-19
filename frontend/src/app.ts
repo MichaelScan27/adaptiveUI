@@ -1,37 +1,15 @@
 var duration;
-var state_dur;
+var time_sec;
 var state;
 var arousal;
 var stability;
 
 setTheme('calm')
-const btn1 = document.getElementById("btn1");
-const btn2 = document.getElementById("btn2");
-const btn3 = document.getElementById("btn3");
-const btn4 = document.getElementById("btn4");
-const btn5 = document.getElementById("btn5");
-btn1?.addEventListener("click", async () => {
-  // const res = await fetch("/api/test");
-  // const data = await res.json();
-  setTheme('calm');
-});
-btn2?.addEventListener("click", async () => {
-  setTheme('neutral');
-});
-btn3?.addEventListener("click", async () => {
-  setTheme('engaged');
-});
-btn4?.addEventListener("click", async () => {
-  setTheme('overloaded');
-});
-btn5?.addEventListener("click", async () => {
-  const res = await fetch("/api/state");
-  const data = await res.json();
-  setTheme(data.state);
-})
-
-
 setInterval(checkState, 200);
+const resetBtn = document.getElementById("resetBtn");
+resetBtn?.addEventListener("click", async () => {
+  const res = await fetch("/api/reset");
+});
 
 function setTheme(state : string ) {
   document.body.className = state;
@@ -41,31 +19,37 @@ async function checkState() {
   const res = await fetch("/api/state");
   const data = await res.json();
   setTheme(data.state);
-  state_dur = data.state_duration;
-  duration = data.time_sec;
-  state = data.state;
-  arousal = data.arousal;
-  stability = data.stability;
+  updateDashboard(data)
 
-
-  const displayTotal = document.getElementById('system-total');
-  if (displayTotal) {
-    displayTotal.textContent = `TOTAL: ${duration}`;
-  }
-  const displayTime = document.getElementById('system-time_sec');
-  if (displayTime) {
-    displayTime.textContent = `STATE DURATION: ${state_dur}`;
-  }
-  const displayArousal = document.getElementById('system-arousal');
-  if (displayArousal) {
-    displayArousal.textContent = `AROUSAL: ${arousal}`;
-  }
-  const displayState = document.getElementById('system-state');
-  if (displayState) {
-    displayState.textContent = `STATE: ${state}`;
-  }
-  const displayStability = document.getElementById('system-stability');
-  if (displayStability) {
-    displayStability.textContent = `STABILITY: ${stability}`;
+function updateDashboard(data: any) {
+    duration = data.state_duration;
+    time_sec = data.time_sec;
+    state = data.state;
+    arousal = data.arousal;
+    stability = data.stability;
+    const displayTimeSec = document.getElementById('system-duration');
+    if (displayTimeSec) {
+      const roundedTimeSec = Math.floor(time_sec * 100)/100;
+      displayTimeSec.textContent = `TOTAL: ${roundedTimeSec} seconds`;
+    }
+    const displayDuration = document.getElementById('system-time_sec');
+    if (displayDuration) {
+      const roundedDuration = Math.floor(duration * 100)/100;
+      displayDuration.textContent = `TIME_SEC: ${roundedDuration} seconds`;
+    }
+    const displayArousal = document.getElementById('system-arousal');
+    if (displayArousal) {
+      const roundedArousal = Math.floor(arousal * 100);
+      displayArousal.textContent = `AROUSAL: ${roundedArousal}%`;
+    }
+    const displayState = document.getElementById('system-state');
+    if (displayState) {
+      displayState.textContent = `STATE: ${state}`;
+    }
+    const displayStability = document.getElementById('system-stability');
+    if (displayStability) {
+      const roundedStability = Math.floor(stability * 100);
+      displayStability.textContent = `STABILITY: ${roundedStability}%`;
+    }
   }
 }

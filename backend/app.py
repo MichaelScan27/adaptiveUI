@@ -2,22 +2,46 @@ from flask import Flask, render_template, jsonify
 
 import time
 import threading
+import json
+from pathlib import Path
 from state_system.state_system import StateSystem
 from state_system.config import UPDATE_TIME
 from state_system.FakeSignalGenerator import FakeSignalGenerator
 
-sm = StateSystem()
-generator = FakeSignalGenerator()
-generator.start()
+LOG_FILE = Path("state_log.jsonl")
+previousState = None
+
+def state_system_init():
+    global sm, generator, thread, state_loop_run
+    state_loop_run = True
+    sm = StateSystem()
+    generator = FakeSignalGenerator()
+    generator.start()
+    thread = threading.Thread(target=state_loop, daemon=True)
+    thread.start()
+
+def state_system_kill():
+    global state_loop_run, thread
+    state_loop_run = False
+    thread.join()
 
 def state_loop():
-    while True:
-
+    global previousState
+    while state_loop_run:
         arousal = generator.get_value()
         state = sm.update(arousal)
+        if (previousState != None and previousState != state):
+            response = {
+                "time_sec": time.monotonic() - sm.init_time,
+                "arousal": sm.smoothed_arousal,
+                "state": sm.state.value,
+                "stability": sm.stability,
+                "state_duration": time.monotonic() - sm.state_start_time
+            }
+            with LOG_FILE.open("a") as f:
+                f.write(json.dumps(response) + "\n")
         
         # print(
-        #     "Update #", i, "\n",
         #     "time_sec:       ", time.monotonic() - sm.init_time, "\n",
         #     "state_duration: ", time.monotonic() - sm.state_start_time, "\n",
         #     "arousal:        ", arousal, "\n",
@@ -25,10 +49,8 @@ def state_loop():
         #     "stability:      ", sm.stability, "\n", 
         # )
 
+        previousState = state
         time.sleep(UPDATE_TIME)
-
-threading.Thread(target=state_loop, daemon=True).start()
-
 
 app = Flask(
     __name__,
@@ -51,5 +73,12 @@ def get_state():
     }
     return jsonify(response)
 
+@app.route("/api/reset")
+def reset():
+    state_system_kill()
+    state_system_init()
+    return {"status": "reset"}
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    state_system_init()
+    app.run(debug=True, use_reloader=False)

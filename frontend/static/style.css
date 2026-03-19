@@ -1,15 +1,20 @@
 body {
   background-color: var(--bg);
   color: var(--secondary);
+  font-family: Helvetica, sans-serif;
 
   display: grid;
   place-items: center;
   height:100vh;
 }
 
-.theme-controls {
-  display: flex;
+.dashboard {
+  display:flex;
+  position:absolute;
+  left:0;
+  top: 0;
   flex-direction: column;
+  justify-items: left;
 }
 
 .container {
@@ -41,12 +46,6 @@ body {
   to {
     transform: rotate(360deg);
   }
-}
-
-body, .container {
-  transition: 
-    background-color 5s ease, 
-    color 5s ease, 
 }
 
 .origin {

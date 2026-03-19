@@ -6,26 +6,15 @@
     <link rel="stylesheet" href="/static/themes.css">
 </head>
 
-<div>
-    <div id="system-total"></div>
-    <div id="system-time_sec"></div>
-    <div id="system-arousal"></div>
-    <div id="system-state"></div>
-    <div id="system-stability"></div>
-
-</div>
-
-<body>
-    <div class="theme-controls"> 
-        <button id="btn1">Calm theme</button>
-        <button id="btn2">Neutral theme</button>
-        <button id="btn3">Engaged theme</button>
-        <button id="btn4">Overloaded theme</button>
-        <button id="btn5">Get current theme</button>
+<body>  
+    <div class="dashboard">
+        <div id="system-duration"></div>
+        <div id="system-time_sec"></div>
+        <div id="system-arousal"></div>
+        <div id="system-state"></div>
+        <div id="system-stability"></div>
+        <button id="resetBtn">Reset Machine</button>
     </div>
-    
-
-    <script src="/static/app.js"></script>
 
     <div class="container">
         <div class="object" style="--i:0"></div>
@@ -45,6 +34,7 @@
         <div class="object" style="--i:14"></div>
         <div class="origin" style="--i:15"></div>
     </div>
+    <script src="/static/app.js"></script>
     
 </body>
 
