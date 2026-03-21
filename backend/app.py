@@ -79,6 +79,18 @@ def reset():
     state_system_init()
     return {"status": "reset"}
 
+@app.route("/api/kill")
+def kill():
+    state_system_kill()
+    return {"status": "kill"}
+
+@app.route("/api/init")
+def start():
+    state_system_init()
+    return {"status": "init"}
+
+
+
 if __name__ == "__main__":
     state_system_init()
     app.run(debug=True, use_reloader=False)

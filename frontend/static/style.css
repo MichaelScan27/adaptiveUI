@@ -2,6 +2,7 @@ body {
   background-color: var(--bg);
   color: var(--secondary);
   font-family: Helvetica, sans-serif;
+  transition: background-color 5s ease, color 5s ease;
 
   display: grid;
   place-items: center;
@@ -35,8 +36,9 @@ body {
   top: 0;
   left: 0;
   transform-origin: 0 0;
-
-  transform: rotate(calc(var(--i) * 360deg / var(--count))) translate(100px);
+  
+  transform: rotate(var(--angle)) translate(100px);
+  transition: transform 0.6s ease, opacity 0.3s ease, scale 2s ease, color 2s ease
 }
 
 @keyframes spin {

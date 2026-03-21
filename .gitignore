@@ -4,3 +4,4 @@ frontend/static/*.js
 .vscode/
 __pycache__/
 .pyc
+backend/state_log.jsonl
