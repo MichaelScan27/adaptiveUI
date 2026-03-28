@@ -13,7 +13,7 @@ git clone repo <url>
 ```
 2. Create Python virtual environment
 ```bash
-cd project/backend
+cd {folder name}/backend
 python -m venv venv
 source venv/bin/activate
 ```
