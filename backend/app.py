@@ -8,7 +8,10 @@ from state_system.state_system import StateSystem
 from state_system.config import UPDATE_TIME
 from state_system.FakeSignalGenerator import FakeSignalGenerator
 
-LOG_FILE = Path("state_log.jsonl")
+Path("logs").mkdir(exist_ok=True) # creates logs/ directory if it doesn't already exist
+timestamp = time.strftime("%Y-%m-%d_%H-%M-%S")
+LOG_FILE = Path(f"logs/log_{timestamp}.jsonl")
+
 previousState = None
 
 def state_system_init():
@@ -54,15 +57,15 @@ def state_loop():
 
 app = Flask(
     __name__,
-    template_folder="../frontend",
-    static_folder="../frontend/static"
+    template_folder="../frontend", # HTML
+    static_folder="../frontend/static" # CSS and JS
 )
 
-@app.route("/")
+@app.route("/") # Serves the webpage
 def home():
     return render_template("index.html")
 
-@app.route("/api/state")
+@app.route("/api/state") # Returns the status of the state system
 def get_state():
     response = {
         "time_sec": time.monotonic() - sm.init_time,
@@ -73,18 +76,18 @@ def get_state():
     }
     return jsonify(response)
 
-@app.route("/api/reset")
+@app.route("/api/reset") # Stops and immediately reinitializes the state system
 def reset():
     state_system_kill()
     state_system_init()
     return {"status": "reset"}
 
-@app.route("/api/kill")
+@app.route("/api/kill") # Stops the state system
 def kill():
     state_system_kill()
     return {"status": "kill"}
 
-@app.route("/api/init")
+@app.route("/api/init") # Starts the state system from a stopped state
 def start():
     state_system_init()
     return {"status": "init"}
