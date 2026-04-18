@@ -4,12 +4,13 @@ var time_sec;
 var state;
 var arousal;
 var stability;
+var previousState : string;
 let stateInterval : any = null;
 //#endregion
 
 //#region INIT
 setTheme('calm')
-stateInterval = setInterval(checkState, 200);
+//stateInterval = setInterval(checkState, 200);
 //#endregion
 
 //#region Buttons
@@ -20,14 +21,32 @@ resetBtn?.addEventListener("click", async () => {
 });
 const killBtn = document.getElementById("killBtn");
 killBtn?.addEventListener("click", async () => {
-  const res = await fetch("/api/kill");
   clearInterval(stateInterval);
   stateInterval = null;
+  const res = await fetch("/api/kill");
 });
-const initBtn = document.getElementById("initBtn");
-initBtn?.addEventListener("click", async () => {
-  const res = await fetch("/api/init");
+const initBtnGen = document.getElementById("initBtnGen");
+initBtnGen?.addEventListener("click", async () => {
   stateInterval = setInterval(checkState, 200);
+  const res = await fetch("/api/init_gen");
+});
+
+const initBtnA = document.getElementById("initBtnA");
+initBtnA?.addEventListener("click", async () => {
+  stateInterval = setInterval(checkState, 200);
+  const res = await fetch("/api/init_a");
+});
+
+const initBtnB = document.getElementById("initBtnB");
+initBtnB?.addEventListener("click", async () => {
+  stateInterval = setInterval(checkState, 200);
+  const res = await fetch("/api/init_b");
+});
+
+const initBtnC = document.getElementById("initBtnC");
+initBtnC?.addEventListener("click", async () => {
+  stateInterval = setInterval(checkState, 200);
+  const res = await fetch("/api/init_c");
 });
 
 // Used when machine is paused to showcase each state
@@ -61,6 +80,20 @@ function setTheme(state : string ) {
   if (state == "neutral") {
     shrinkLayout();
   }
+
+  if (previousState != state) { // Only update title if a state change occurred
+    const stateTitle = document.getElementById('stateTitle');
+    if (stateTitle) {
+      stateTitle.classList.add("fadeout")
+
+      setTimeout(() => {
+        stateTitle.textContent = state.toUpperCase();
+        stateTitle.classList.remove("fadeout");
+      }, 200);
+    }
+  }
+
+  previousState = state;
 }
 
 function updateLayout(count: number) {

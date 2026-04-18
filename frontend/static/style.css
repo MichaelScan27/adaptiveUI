@@ -56,5 +56,25 @@ body {
   height: 10px;
   border-radius: 50%;
   background: var(--accent);
+  color:var(--accent);
   transform: translate(-50%, -50%);
+}
+
+.buttonCeiling{
+  margin-top: 20px;
+}
+
+.state-title {
+  align-self: flex-start;
+  margin-top: 20px;
+  font-size: xx-large;
+  font-weight: bold;
+  color: var(--accent);
+  opacity: 1;
+  transition: opacity 0.2s ease, color 2s ease
+}
+
+.fadeout{
+  opacity: 0;
+  
 }

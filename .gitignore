@@ -5,3 +5,4 @@ frontend/static/*.js
 __pycache__/
 .pyc
 backend/logs/
+logs/log_2026-04-18_11-05-33.jsonl

@@ -4,7 +4,7 @@
   --secondary: #FF0000;
   --accent: #FF0000;
   --count: 1;
-  --speed: 1;
+  --speed: 1s;
 }
 
 .calm {
@@ -20,7 +20,7 @@
   --bg: #b7dbc5;
   --primary: #00c22d;
   --secondary: #1e1e1e;
-  --accent: #204111;
+  --accent: #1f6001;
   --count: 5;
   --speed: 5s;
 }
@@ -29,7 +29,7 @@
   --bg: #f2cf32;
   --primary: #ee4f00;
   --secondary: #1e1e1e;
-  --accent: #464915;
+  --accent: #751200;
   --count: 9;
   --speed: 3s;
 }
@@ -38,7 +38,7 @@
   --bg: #ffa16b;
   --primary: #ff0000;
   --secondary: #1e1e1e;
-  --accent: #611f1f;
+  --accent: #c10303;
   --count: 13;
   --speed: 0.5s;
 }

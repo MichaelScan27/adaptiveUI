@@ -4,8 +4,8 @@ import threading
 from .config import UPDATE_TIME
 
 class PresetSignal:
-    def __init__(self, values):
-        self.value
+    def __init__(self, signalList, baseline=0.0 ):
+        self.value = baseline
         self.signalList = signalList
         self.lock = threading.Lock()
         self.running = False
@@ -13,10 +13,12 @@ class PresetSignal:
 
     def _loop(self): 
         while self.running: 
+            if self.index >= len (self.signalList):
+                self.index = 0
+
             self.value = self.signalList[self.index]
             self.index += 1 
-            if index >= len (self.signalList):
-                self.index = 0
+            
             time.sleep(UPDATE_TIME) # Time-gap between each data point
 
     # Threading is necessary so the signal is continuous and does not only advance when the next value is needed.

@@ -34,5 +34,6 @@ DWELL_TIME = 5 # minimum dwell time in seconds
 ALPHA = 0.25 # EMA Smoothing strength
 
 ## Preset Signals
-SIGNAL_A = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0]
-
+SIGNAL_A = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0]
+SIGNAL_B = [1, 1, 1]
+SIGNAL_C = [0.45,0.45,0.45,0.45,0.45,0.85,0.85,0.85,0.85,0.85]
