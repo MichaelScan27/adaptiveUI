@@ -32,3 +32,7 @@ OVERLOADED_ENGAGED_EXIT = 0.75
 UPDATE_TIME = 0.2 # frequency of updates in seconds
 DWELL_TIME = 5 # minimum dwell time in seconds
 ALPHA = 0.25 # EMA Smoothing strength
+
+## Preset Signals
+SIGNAL_A = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0]
+
