@@ -17,6 +17,9 @@ setTheme('calm')
 // Controls state machine
 const resetBtn = document.getElementById("resetBtn");
 resetBtn?.addEventListener("click", async () => {
+  if (stateInterval == null) {
+    stateInterval = setInterval(checkState, 200);
+  }
   const res = await fetch("/api/reset");
 });
 const killBtn = document.getElementById("killBtn");
